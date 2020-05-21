@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+import Boards from './boards';
+
 class App extends Component {
     render() {
-        return(<h1>Hija</h1>);
+        return(<Boards />);
     }
 }
 

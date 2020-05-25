@@ -53,17 +53,18 @@ class Boards extends Component {
 
     render() {
         return (
-            <div>
-                <div className="boards">
+            <div className="boards-container d-flex flex-auto flex-column clearfix position-relative no-wrap">
+                <div className="boards d-flex flex-auto flex-row p-sm-3 position-relative overflow-auto border-black">
                     {this.state.lists.map((list, key) => {
                         return <React.Fragment key={key}>
-                            <List list={list} id={key} addItem={this.addItem.bind(this, key)}/>
+                            <List list={list} id={key} addItem={this.addItem.bind(this, key)} lists={this.state.lists}/>
                         </React.Fragment>
                     })}
-                </div>
+                    
                 {this.state.newItem 
                 ? <NewBoard addBoard={this.addBoard.bind(this)} />
-                : <button onClick={() => this.setState({newItem: true})}>Add new board</button>}
+                : <button className="newBoard" onClick={() => this.setState({newItem: true})}>Add new board</button>}
+                </div>
             </div>
 
         )

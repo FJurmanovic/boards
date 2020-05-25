@@ -16,7 +16,7 @@ export default class NewBoard extends Component {
 
     render() {
         return (
-            <div>
+            <div className="newBoard">
                 <input onChange={this.titleChange} value={this.state.titleVal} />
                 <button onClick={() => this.props.addBoard(this.state.titleVal)}>Submit</button>
             </div>

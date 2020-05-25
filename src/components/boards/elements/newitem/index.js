@@ -17,7 +17,7 @@ export default class NewItem extends Component {
     render() {
         return (
             <div>
-                <input onChange={this.contentChange} value={this.state.contentVal} />
+                <textarea onChange={this.contentChange} value={this.state.contentVal} />
                 <button onClick={() => this.props.addItem(this.state.contentVal)}>Submit</button>
             </div>
         )

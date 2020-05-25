@@ -15,3 +15,17 @@
 .label {
     margin: 2px;
 }
+
+.item {
+    align-self: flex-start;
+
+    .edit {
+        position: absolute;
+        top: 2px;
+        right: 3px;
+
+        &.btn-icon {
+            transform: scale(.8);
+        }
+    }
+}

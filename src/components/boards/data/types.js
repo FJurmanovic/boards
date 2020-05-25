@@ -1,4 +1,5 @@
-const ITEM_TYPE = "ITEM";
-const LIST_TYPE = "LIST";
+const ITEM_TYPE = 'ITEM';
+const LIST_TYPE = 'LIST';
+const EDIT_TYPE = 'EDIT';
 
-export default { ITEM_TYPE, LIST_TYPE };
+export { ITEM_TYPE, LIST_TYPE, EDIT_TYPE };

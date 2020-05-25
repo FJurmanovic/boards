@@ -51,16 +51,27 @@ class Boards extends Component {
         this.setState({updateState: value})
     }
 
+    moveItem(key, listId, itemId, newId) {
+        console.log(listId, itemId, newId)
+        let { lists } = this.state;
+        let item = lists[listId].items[itemId];
+        lists[newId].items.push(item)
+        lists[listId].items.splice(itemId, 1)
+    }
+
+    onDrop() {
+
+    }
+
     render() {
         return (
             <div className="boards-container d-flex flex-auto flex-column clearfix position-relative no-wrap">
                 <div className="boards d-flex flex-auto flex-row p-sm-3 position-relative overflow-auto border-black">
-                    {this.state.lists.map((list, key) => {
-                        return <React.Fragment key={key}>
-                            <List list={list} id={key} addItem={this.addItem.bind(this, key)} lists={this.state.lists}/>
-                        </React.Fragment>
-                    })}
-                    
+                        {this.state.lists.map((list, key) => {
+                            return <React.Fragment key={key}>
+                                <List list={list} id={key} addItem={this.addItem.bind(this, key)} lists={this.state.lists} moveItem={this.moveItem.bind(this, key)}/>
+                            </React.Fragment>
+                        })}
                 {this.state.newItem 
                 ? <NewBoard addBoard={this.addBoard.bind(this)} />
                 : <button className="newBoard" onClick={() => this.setState({newItem: true})}>Add new board</button>}

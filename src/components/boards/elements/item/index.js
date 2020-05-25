@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import ReactMarkdown from 'react-markdown';
 
 import { useDrag } from "react-dnd";
 
@@ -21,7 +22,7 @@ const Item = (props) => {
     return(
         <div className="item flex-auto position-relative border m-2 mx-3" ref={drag}>
             <div className="labels"><span className="label">ReactJS</span><span className="label">Frontend</span></div>
-            <div className="content px-2">{item.content}</div>
+            <div className="content px-2"><ReactMarkdown source={item.content} /></div>
             <button className="edit btn btn-icon" onClick={() => editAction()}><div className="gg-pen"></div></button>
         </div>
     );

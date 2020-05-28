@@ -9,7 +9,7 @@ import NewItem from '../newitem'
 import { LIST_TYPE, ITEM_TYPE } from "../../data/types"
 
 const List = (props) => {
-    const { list, id, addItem, lists, moveItem } = props;
+    const { list, id, addItem, lists, moveItem, switchItems } = props;
 
     const [newItem, setNewItem] = useState(false)
 
@@ -18,6 +18,10 @@ const List = (props) => {
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: ITEM_TYPE,
         drop: (item, monitor) => {
+            if (monitor.didDrop()) {
+                return
+              }
+
             moveItem(item.listId, item.itemId, id)
         },
         collect: monitor => (
@@ -41,6 +45,11 @@ const List = (props) => {
         setItemEdit(null)
     }
 
+    const switchItem = (newId, oldList, oldId, newList) => {
+        switchItems(newId, oldList, oldId, newList)
+
+    }
+
     return(
         <div ref={drop} className="list position-relative d-flex flex-auto flex-column overflow-hidden mr-3 v-align-top rounded-2 border ws-normal hide-sm">
             <div className="title">{list.title} <span className="add">{newItem ? <button onClick={() => setNewItem(false)}>Cancel</button> : <button onClick={() => setNewItem(true)}>New item</button>}</span></div>
@@ -49,7 +58,7 @@ const List = (props) => {
                     return <React.Fragment key={key}>
                         {itemEdit == key 
                         ? <Edit item={item} listId={id} itemId={key} editItem={editItem} /> 
-                        : <Item item={item} moveItem={moveItem} listId={id} itemId={key} editAction={() => setItemEdit(key)} />
+                        : <Item item={item} moveItem={moveItem} listId={id} itemId={key} editAction={() => setItemEdit(key)} switchItem={switchItem.bind(this, key)} />
                         }   
                     </React.Fragment>
                 })}

@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 
 import ReactMarkdown from 'react-markdown';
 
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 
 import {ITEM_TYPE} from '../../data/types'
 
 const Item = (props) => {
-    const { item, moveItem, listId, itemId, editAction } = props;
+    const { item, moveItem, listId, itemId, editAction, switchItem } = props;
 
     const [{ isDragging }, drag] = useDrag({
         item: { item, itemId, type: ITEM_TYPE, listId},
@@ -17,13 +17,29 @@ const Item = (props) => {
         collect: monitor => ({
             isDragging: !!monitor.isDragging()
         })
-        })
+    })
+
+    const [{ isOver, canDrop }, drop] = useDrop({
+        accept: ITEM_TYPE,
+        drop: (item, monitor) => {
+            switchItem(item.listId, item.itemId, listId, itemId)
+        },
+        collect: monitor => (
+            {
+                isOver: !!monitor.isOver(),
+                canDrop: !!monitor.canDrop()
+            }
+        )
+    })
 
     return(
         <div className="item flex-auto position-relative border m-2 mx-3" ref={drag}>
-            <div className="labels"><span className="label">ReactJS</span><span className="label">Frontend</span></div>
-            <div className="content px-2"><ReactMarkdown source={item.content} /></div>
-            <button className="edit btn btn-icon" onClick={() => editAction()}><div className="gg-pen"></div></button>
+            <div className="width-full" ref={drop}>
+                <div className="labels"><span className="label">ReactJS</span><span className="label">Frontend</span></div>
+                <div className="content px-2"><ReactMarkdown source={item.content} /></div>
+                <div>{listId}, {itemId}</div>
+                <button className="edit btn btn-icon" onClick={() => editAction()}><div className="gg-pen"></div></button>
+            </div>
         </div>
     );
 }

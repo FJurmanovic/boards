@@ -63,13 +63,20 @@ class Boards extends Component {
 
     }
 
+    switchItems(newList, newId, oldList, oldId) {
+        const { lists } = this.state;
+        lists[newList].items.splice(newId, 0, lists[oldList].items[oldId])
+        lists[oldList].items.splice(oldId, 1)
+
+    }
+
     render() {
         return (
             <div className="boards-container d-flex flex-auto flex-column clearfix position-relative no-wrap">
                 <div className="boards d-flex flex-auto flex-row p-sm-3 position-relative overflow-auto border-black">
                         {this.state.lists.map((list, key) => {
                             return <React.Fragment key={key}>
-                                <List list={list} id={key} addItem={this.addItem.bind(this, key)} lists={this.state.lists} moveItem={this.moveItem.bind(this, key)}/>
+                                <List list={list} id={key} addItem={this.addItem.bind(this, key)} lists={this.state.lists} moveItem={this.moveItem.bind(this, key)} switchItems={this.switchItems.bind(this, key)} />
                             </React.Fragment>
                         })}
                 {this.state.newItem 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 
 import {EDIT_TYPE} from '../../data/types'
 
@@ -19,6 +19,7 @@ const Edit = (props) => {
             isDragging: !!monitor.isDragging()
         })
     })
+
 
     const handleContent = (e) => {
         setContent(e.target.value)

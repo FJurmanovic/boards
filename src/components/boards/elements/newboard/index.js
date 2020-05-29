@@ -16,9 +16,10 @@ export default class NewBoard extends Component {
 
     render() {
         return (
-            <div className="newBoard">
-                <input onChange={this.titleChange} value={this.state.titleVal} />
-                <button onClick={() => this.props.addBoard(this.state.titleVal)}>Submit</button>
+            <div className="newBoard border pr-5">
+                <div className="mx-2 my-3"><label className="mx-3 my-3" for="title">Title</label><span className="float-right"><button className="mx-2 mt-n2 btn btn-sm btn-blue-transparent btn-rounder" onClick={() => this.props.cancelBtn()}>Cancel</button></span></div>
+                <input onChange={this.titleChange} id="title" value={this.state.titleVal} className="m-2 mx-3 d-block width-full" />
+                <button className="m-2 mx-3 my-6 btn btn-blue btn-squared d-block width-full submit" onClick={() => this.props.addBoard(this.state.titleVal)}>Submit</button>
             </div>
         )
     }

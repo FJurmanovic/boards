@@ -35,9 +35,12 @@ const Item = (props) => {
     return(
         <div className="item flex-auto position-relative border m-2 mx-3" ref={drag}>
             <div className="width-full" ref={drop}>
-                <div className="labels"><span className="label">ReactJS</span><span className="label">Frontend</span></div>
+                <div className="labels">{item.labels.map((label, key) => {
+                    return <React.Fragment key={key}>
+                        <span className="label">{label}</span>
+                    </React.Fragment>
+                })}</div>
                 <div className="content px-2"><ReactMarkdown source={item.content} /></div>
-                <div>{listId}, {itemId}</div>
                 <button className="edit btn btn-icon" onClick={() => editAction()}><div className="gg-pen"></div></button>
             </div>
         </div>

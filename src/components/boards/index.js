@@ -11,24 +11,53 @@ class Boards extends Component {
             newItem: false,
             lists: [
                 {
-                    title: "Title one",
+                    title: "To-do",
                     items: [   
                         {
-                            content: "One"
+                            content: "One",
+                            labels: [
+                                "Frontend"
+                            ]
                         },
                         {
-                            content: "Two"
+                            content: "Two",
+                            labels: [
+                                "Backend"
+                            ]
                         }
                     ]
                 },
                 {
-                    title: "Title two",
+                    title: "In progress",
                     items: [   
                         {
-                            content: "Three"
+                            content: "One",
+                            labels: [
+                                "Frontend"
+                            ]
                         },
                         {
-                            content: "Four"
+                            content: "Two",
+                            labels: [
+                                "Backend"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Complete",
+                    items: [   
+                        {
+                            content: "One",
+                            labels: [
+                                "Frontend"
+                            ]
+                        },
+                        {
+                            content: "Two",
+                            labels: [
+                                "Backend"
+                            ]
                         }
                     ]
                 }
@@ -80,8 +109,8 @@ class Boards extends Component {
                             </React.Fragment>
                         })}
                 {this.state.newItem 
-                ? <NewBoard addBoard={this.addBoard.bind(this)} />
-                : <button className="newBoard" onClick={() => this.setState({newItem: true})}>Add new board</button>}
+                ? <NewBoard addBoard={this.addBoard.bind(this)} cancelBtn={() => this.setState({newItem: false})} />
+                : <button className="newBoard btn btn-white btn-squared border" onClick={() => this.setState({newItem: true})}>Add new board</button>}
                 </div>
             </div>
 

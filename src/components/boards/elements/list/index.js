@@ -34,14 +34,18 @@ const List = (props) => {
 
     const addItemToList = (value) => {
         let { items } = list;
-        items.push({"content": value})
+        items.push({"content": value, "labels": []})
         setNewItem(false)
         addItem(true);
     }
 
-    const editItem = (id, item) => {
+    const editItem = (id, content, labels) => {
         let { items } = list;
-        items[id].content = item;
+
+        items[id].content = content;
+        items[id].labels = labels;
+
+        console.log(labels)
         setItemEdit(null)
     }
 
@@ -52,8 +56,7 @@ const List = (props) => {
 
     return(
         <div ref={drop} className="list position-relative d-flex flex-auto flex-column overflow-hidden mr-3 v-align-top rounded-2 border ws-normal hide-sm">
-            <div className="title">{list.title} <span className="add">{newItem ? <button onClick={() => setNewItem(false)}>Cancel</button> : <button onClick={() => setNewItem(true)}>New item</button>}</span></div>
-            {newItem && <NewItem addItem={addItemToList.bind(this)}/>}
+            <div className="title">{list.title}</div>
             <div className="itemList">{list.items.map((item, key) => {
                     return <React.Fragment key={key}>
                         {itemEdit == key 
@@ -62,6 +65,10 @@ const List = (props) => {
                         }   
                     </React.Fragment>
                 })}
+                <div className={newItem && "border m-2 mx-3"}>
+                    <div className="add flex-auto position-relative m-2 mx-3 ">{newItem ? <button className="btn btn-blue-transparent btn-sm btn-rounder" onClick={() => setNewItem(false)}>Cancel</button> : <button className="width-full py-4 btn btn-white btn-squared border" onClick={() => setNewItem(true)}>New item</button>}</div>
+                    {newItem && <NewItem addItem={addItemToList.bind(this)}/>}
+                </div> 
             </div>
         </div>
     );

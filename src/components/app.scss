@@ -1,12 +1,20 @@
 .list {
     min-width: 355px;
     max-width: 355px;
+
+    .title {
+        text-align: center;
+        font-weight: 600;
+        margin: 2px;
+    }
 }
+
+
 
 .newBoard {
     min-width: 355px;
     max-width: 355px;
-    max-height: 150px;
+    max-height: 132px;
 }
 
 .boards-container {

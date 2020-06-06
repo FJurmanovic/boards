@@ -81,7 +81,6 @@ class Boards extends Component {
     }
 
     moveItem(key, listId, itemId, newId) {
-        console.log(listId, itemId, newId)
         let { lists } = this.state;
         let item = lists[listId].items[itemId];
         lists[newId].items.push(item)
@@ -94,8 +93,9 @@ class Boards extends Component {
 
     switchItems(newList, newId, oldList, oldId) {
         const { lists } = this.state;
-        lists[newList].items.splice(newId, 0, lists[oldList].items[oldId])
+        const temp = lists[oldList].items[oldId]
         lists[oldList].items.splice(oldId, 1)
+        lists[newList].items.splice(newId, 0, temp)
 
     }
 
